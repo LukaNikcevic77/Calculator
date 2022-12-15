@@ -99,34 +99,48 @@ body{
    font-size: 48px;
    margin: 0rem auto;
 }
-
-.input-frame{
-    display: grid;
-    justify-content: space-evenly;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+.input-frame-holder{
+    
     height: 350px;
     width: 300px;
     border-radius: 20px;
     background-color: rgb(41, 45, 54);
     margin-bottom: -2rem;
+}
+.input-frame{
+    display: grid;
     
+    justify-items: center;
+    align-items: center;
+    column-gap: 0.6rem;
+    row-gap: 0.6rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 250px;
+    width: 200px;
+    border-radius: 20px;
+    background-color: rgb(41, 45, 54);
+    margin: 1.4rem;
     
 }
    
 
 
 .input-button{
-    background-color: red;
+    background-color: rgb(29, 32, 37);
     border: transparent;
-    border-radius: 20px;
+    border-radius: 10px;
     font-family: "Inter";
-    font-size: 28px;
-    font-weight: 400;
+    font-size: 22px;
+    font-weight: 600;
     color: rgb(38, 217, 187);
-    height: 45px;
-    width: 45px;
+    min-height: 55px;
+    min-width: 55px;
+    
+}
+.red {
+    color: rgb(243,122,122);
+}
+.white {
+    color: white;
 }
