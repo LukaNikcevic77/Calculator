@@ -5,11 +5,15 @@ const lowerOperator = document.getElementById("current-input");
 const numbers = document.querySelectorAll("button");
 
 let gotFirstNum = false;
-let firstNum  = 0;
-let secondNum = 0;
+let gotSecondNum = false;
+let firstNum  = '';
+let secondNum = '';
 let countNumbers = 0;
 let operator = '';
-
+let currentInput = '';
+let hadResult = false;
+let currentInputDoubler = '';
+let isInfinity = false;
 
 const operatorSpan = document.createElement("span");
 operatorSpan.style.color = "rgb(198,104,105)";
@@ -58,234 +62,417 @@ function AddListeners(){
 }
 function AddNumber(a){
 
-    if(gotFirstNum == false && countNumbers < 9){
+    if(countNumbers < 9){
 
-            lowerOperator.textContent += a.target.value;
-            
-            if(countNumbers == 0){
-
-                firstNum = a.target.value;
+            if(isInfinity == true){
+                
+                lowerOperator.textContent = a.target.value
+                isInfinity = false;
+                currentInput = a.target.value;
             }
+
             else {
 
-                firstNum += a.target.value;
-            }
+                if(countNumbers == 0){
 
-                console.log(firstNum);
+                    currentInput = a.target.value;
+                    lowerOperator.textContent = a.target.value;
+
+                }
+                else {
+    
+                    currentInput += a.target.value;
+                    lowerOperator.textContent += a.target.value;
+                    
+                }
+                
+            }
+            
+            
+            
+
+                
                 countNumbers += 1;
-
-    }
-
-    else if(countNumbers < 9) {
-            lowerOperator.textContent += a.target.value;
-            
-            if(countNumbers == 0){
-
-            secondNum = a.target.value;
-            }
-            else {
-
-            secondNum += a.target.value;
-            }
-
-            console.log(secondNum);
-            countNumbers += 1;
+               
+                currentInputDoubler = currentInput * currentInput;
 
     }
 
     
+
+
+    
 }
+
 function AddOperator(a){
 
     switch(a.target.value){
 
             case "%":
-                if(gotFirstNum == false){
 
+                if(gotFirstNum == false && currentInput != '') {
+                
                 operator = "%";
+                firstNum = currentInput;
+                gotFirstNum = true;
+
                 upperEquation.textContent += firstNum + " ";
                 operatorSpan.textContent = operator + " ";
                 upperEquation.appendChild(operatorSpan);
-                gotFirstNum = true;
+                
                 countNumbers = 0;
-                firstNum = 0;
-                lowerOperator.textContent = "";
+                currentInput = '';
+                lowerOperator.textContent = '';
 
                 }
+
+               
+
                 else {
 
-                operator = "%";
-                operatorSpan.textContent = operator + " ";
-                
+                        operator = "%";
+                        upperEquation.textContent = firstNum + " ";
+                        operatorSpan.textContent = operator + " ";
+                        upperEquation.appendChild(operatorSpan);
+                        
                 }
+               
+                   
 
             break;
             
             case "AC":
-
+                
                 operator = '';
+                firstNum = ''
+                secondNum = '';
                 upperEquation.textContent = '';
-                
-                gotFirstNum = false;
-                countNumbers = 0;
-                
-                firstNum = 0;
                 lowerOperator.textContent = '';
                 operatorSpan.textContent = '';
-                secondNum = 0;
+                gotFirstNum = false;
+                gotSecondNum = false;
+                countNumbers = 0;
+                
+                
             break;
 
             case "root":
                
-            if(gotFirstNum == false){
+            if(gotFirstNum == false && currentInput != '') {
                 
-            
                 operator = "root";
+                firstNum = currentInput;
+                gotFirstNum = true;
+                countNumbers = 0;
+                currentInput = '';
+
                 upperEquation.textContent += firstNum + " ";
                 operatorSpan.append(rootIcon);
                 upperEquation.appendChild(operatorSpan);      
-                
-                
-                gotFirstNum = true;
-                countNumbers = 0;
-                firstNum = 0;
-                lowerOperator.textContent = "";
+                lowerOperator.textContent = '';
 
                 }
+
                 else {
-
-                operator = "root";
-                upperEquation.removeChild(upperEquation.lastChild);
-                operatorSpan.textContent = " ";
-                operatorSpan.removeChild(operatorSpan.lastChild);
-                operatorSpan.append(rootIcon);
-                upperEquation.appendChild(operatorSpan);
+                    
+                    operator = "root";
+                    operatorSpan.removeChild(operatorSpan.firstChild);
+                    operatorSpan.appendChild(rootIcon);
+    
+                    if(upperEquation.querySelector("span") !== null){
+                        
+                    }
+                    else {
+                        upperEquation.appendChild(operatorSpan);
+                    }
                 
                 
                 }
+
             break;
 
             case "/":
                
-            if(gotFirstNum == false){
+            if(gotFirstNum == false && currentInput != '') {
                 
-            
                 operator = "/";
+                firstNum = currentInput;
+                gotFirstNum = true;
+                countNumbers = 0;
+                currentInput = '';
+
                 upperEquation.textContent += firstNum + " ";
                 operatorSpan.append(divideIcon);
                 upperEquation.appendChild(operatorSpan);      
-                
-                
-                gotFirstNum = true;
-                countNumbers = 0;
-                firstNum = 0;
-                lowerOperator.textContent = "";
+                lowerOperator.textContent = '';
 
                 }
+
                 else {
-
-                operator = "/";
-                upperEquation.removeChild(upperEquation.lastChild);
-                operatorSpan.textContent = " ";
-                operatorSpan.removeChild(operatorSpan.lastChild);
-                operatorSpan.append(divideIcon);
-                upperEquation.appendChild(operatorSpan);
+                    
+                    operator = "/";
+                    operatorSpan.removeChild(operatorSpan.firstChild);
+                    operatorSpan.appendChild(divideIcon);
+    
+                    if(upperEquation.querySelector("span") !== null){
+                        
+                    }
+                    else {
+                        upperEquation.appendChild(operatorSpan);
+                    }
                 
                 
                 }
+
             break;
 
             case "*":
                
-            if(gotFirstNum == false){
+            if(gotFirstNum == false && currentInput != '') {
                 
-            
                 operator = "*";
+                firstNum = currentInput;
+                gotFirstNum = true;
+                countNumbers = 0;
+                currentInput = '';
+
                 upperEquation.textContent += firstNum + " ";
                 operatorSpan.append(timesIcon);
                 upperEquation.appendChild(operatorSpan);      
-                
-                
-                gotFirstNum = true;
-                countNumbers = 0;
-                firstNum = 0;
-                lowerOperator.textContent = "";
+                lowerOperator.textContent = '';
 
                 }
+
                 else {
-
-                operator = "*";
-                upperEquation.removeChild(upperEquation.lastChild);
-                operatorSpan.textContent = " ";
-                operatorSpan.removeChild(operatorSpan.lastChild);
-                operatorSpan.append(timesIcon);
-                upperEquation.appendChild(operatorSpan);
+                    
+                    operator = "*";
+                    operatorSpan.removeChild(operatorSpan.firstChild);
+                    operatorSpan.appendChild(timesIcon);
+    
+                    if(upperEquation.querySelector("span") !== null){
+                        
+                    }
+                    else {
+                        upperEquation.appendChild(operatorSpan);
+                    }
                 
                 
                 }
+
             break;
 
             case "-":
                
-            if(gotFirstNum == false){
+            if(gotFirstNum == false && currentInput != '') {
                 
-            
                 operator = "-";
+                firstNum = currentInput;
+                gotFirstNum = true;
+                countNumbers = 0;
+                currentInput = '';
+
                 upperEquation.textContent += firstNum + " ";
                 operatorSpan.append(minusIcon);
                 upperEquation.appendChild(operatorSpan);      
-                
-                
-                gotFirstNum = true;
-                countNumbers = 0;
-                firstNum = 0;
-                lowerOperator.textContent = "";
+                lowerOperator.textContent = '';
 
                 }
+
                 else {
-
-                operator = "-";
-                upperEquation.removeChild(upperEquation.lastChild);
-                operatorSpan.textContent = " ";
-                operatorSpan.removeChild(operatorSpan.lastChild);
-                operatorSpan.append(minusIcon);
-                upperEquation.appendChild(operatorSpan);
+                    
+                    operator = "-";
+                    operatorSpan.removeChild(operatorSpan.firstChild);
+                    operatorSpan.appendChild(minusIcon);
+    
+                    if(upperEquation.querySelector("span") !== null){
+                        
+                    }
+                    else {
+                        upperEquation.appendChild(operatorSpan);
+                    }
                 
                 
                 }
+
             break;
 
             case "+":
                
-            if(gotFirstNum == false){
+            if(gotFirstNum == false && currentInput != '') {
                 
-            
                 operator = "+";
+                firstNum = currentInput;
+                gotFirstNum = true;
+                countNumbers = 0;
+                currentInput = '';
+
                 upperEquation.textContent += firstNum + " ";
                 operatorSpan.append(plusIcon);
                 upperEquation.appendChild(operatorSpan);      
-                
-                
-                gotFirstNum = true;
-                countNumbers = 0;
-                firstNum = 0;
-                lowerOperator.textContent = "";
+                lowerOperator.textContent = '';
 
                 }
+
                 else {
-
-                operator = "+";
-                upperEquation.removeChild(upperEquation.lastChild);
-                operatorSpan.textContent = " ";
-                operatorSpan.removeChild(operatorSpan.lastChild);
-                operatorSpan.append(plusIcon);
-                upperEquation.appendChild(operatorSpan);
+                    
+                    operator = "+";
+                    operatorSpan.removeChild(operatorSpan.firstChild);
+                    operatorSpan.appendChild(plusIcon);
+    
+                    if(upperEquation.querySelector("span") !== null){
+                        
+                    }
+                    else {
+                        upperEquation.appendChild(operatorSpan);
+                    }
                 
                 
                 }
+
             break;
 
+            case "clear":
+               
+            currentInput = '';
+            countNumbers = 0;
+            lowerOperator.textContent = '';
+            break;
 
+            case "-":
+               
+            if(gotFirstNum == false && currentInput != '') {
+                
+                operator = "-";
+                firstNum = currentInput;
+                gotFirstNum = true;
+                countNumbers = 0;
+                currentInput = '';
+
+                upperEquation.textContent += firstNum + " ";
+                operatorSpan.append(minusIcon);
+                upperEquation.appendChild(operatorSpan);      
+                lowerOperator.textContent = '';
+
+                }
+
+                else {
+                    
+                    operator = "-";
+                    operatorSpan.removeChild(operatorSpan.firstChild);
+                    operatorSpan.appendChild(minusIcon);
+    
+                    if(upperEquation.querySelector("span") !== null){
+                        
+                    }
+                    else {
+                        upperEquation.appendChild(operatorSpan);
+                    }
+                
+                
+                }
+
+            break;
+
+            case ".":
+               
+            currentInput += '.';
+            countNumbers += 1;
+            lowerOperator.textContent += '.';
+
+            break;
+
+            case "=":
+               
+            if(gotFirstNum == false){
+                
+                    if(currentInput == ''){
+
+                    }
+
+                    else if (currentInputDoubler.toString().length < 9){
+
+                        firstNum = currentInput * currentInput;
+                        countNumbers = 0;
+                        currentInput = '';
+                        gotFirstNum = true;
+                        lowerOperator.textContent = firstNum;
+                        hadResult = true;
+
+                    }
+
+                    else {
+
+                        isInfinity = true;
+                        lowerOperator.textContent = 'INFINITY!';
+                    }
+
+
+            }
+
+            else if(gotSecondNum == false) {
+
+                    if (currentInput == '') {
+                        
+                        if (currentInputDoubler.toString().length < 9){
+
+                            firstNum = currentInput * currentInput;
+                            countNumbers = 0;
+                            currentInput = '';
+                            gotFirstNum = true;
+                            lowerOperator.textContent = firstNum;
+                            operator = '';
+                            hadResult = true;
+
+                        }
+
+                        else {
+
+                            isInfinity = true;
+                            lowerOperator.textContent = 'INFINITY!';
+
+                        }
+                        
+                    }
+
+                    else {
+                        
+                        secondNum = currentInput;
+                        gotSecondNum = true;
+                        countNumbers = 0;
+                        currentInput = '';
+
+                    if (upperEquation.querySelector("span") !== null){
+
+                        upperEquation.removeChild(upperEquation.firstChild);
+                        upperEquation.removeChild(upperEquation.lastChild);
+                        upperEquation.appendChild(operatorSpan);
+                        operatorSpan.before(firstNum + " ");
+                        operatorSpan.after(secondNum);
+                    }
+
+                    else {
+                        
+                        upperEquation.textContent += firstNum + " ";
+                        upperEquation.appendChild(operatorSpan);
+                        operatorSpan.after(secondNum);
+
+                    }
+                    DoMath(firstNum, secondNum, operator);
+
+                    }
+                    
+            }
+
+                    else {
+
+                        DoMath(firstNum, secondNum, operator);
+
+                    }
+            
+
+            break;
+
+            
             
 
            
@@ -298,6 +485,57 @@ function AddOperator(a){
 
 
     }
+}
+
+function DoMath(num1, num2, operator){
+    
+        switch(operator){
+                
+            case "%":
+
+                if(num2 == 0 || num1 == 0){
+                    
+                    isInfinity = true;
+                    lowerOperator.textContent = 'INFINITY!';
+                    firstNum = 0;
+                    secondNum = 0;
+                    currentInput = '';
+                    countNumbers = 0;
+                    gotFirstNum = false;
+                    gotSecondNum = false;
+                    operator = '';
+
+                    operatorSpan.textContent = '';
+                    upperEquation.textContent = '';
+                    
+
+                }
+
+                else {
+                    
+                    hadResult = true;
+                    gotFirstNum = false;
+                    firstNum = num1 % num2;
+                    secondNum = num2;
+                    countNumbers = 0;
+                    currentInput = '';
+                    lowerOperator.textContent = firstNum;
+                    
+                    
+                    
+
+                }
+
+                break;
+            
+            case "root":
+
+                
+                
+
+
+            }
+
 }
 
 
