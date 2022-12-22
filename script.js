@@ -13,6 +13,7 @@ let operator = '';
 let currentInput = '';
 let hadResult = false;
 let currentInputDoubler = '';
+let firstNumDoubler = '';
 let isInfinity = false;
 
 const operatorSpan = document.createElement("span");
@@ -382,14 +383,38 @@ function AddOperator(a){
             break;
 
             case "=":
-               
+            
+            
+
             if(gotFirstNum == false){
                 
                     if(currentInput == ''){
+                        firstNumDoubler = firstNum * firstNum;
+                        if(hadResult && firstNumDoubler.toString().length < 9){
+
+                        firstNum = firstNum * firstNum;
+                        countNumbers = 0;
+                        currentInput = '';
+                        gotFirstNum = false;
+                        lowerOperator.textContent = firstNum;
+                        hadResult = true;
+
+                        }
+                        
+                        else if(firstNumDoubler.toString().length >= 9){
+
+                            isInfinity = true;
+                            lowerOperator.textContent = 'INFINITY!';
+                        }
+
+                        else {
+
+                        }
 
                     }
 
-                    else if (currentInputDoubler.toString().length < 9){
+
+                    else if (currentInputDoubler.toString().length < 9 && currentInput == ''){
 
                         firstNum = currentInput * currentInput;
                         countNumbers = 0;
@@ -397,6 +422,20 @@ function AddOperator(a){
                         gotFirstNum = true;
                         lowerOperator.textContent = firstNum;
                         hadResult = true;
+
+                    }
+
+                    else if (currentInput.toString().length < 9){
+
+                        
+
+                        firstNum = currentInput;
+                        countNumbers = 0;
+                        currentInput = '';
+                        gotFirstNum = true;
+                        
+                        DoMath(firstNum, secondNum, operator);
+
 
                     }
 
@@ -414,6 +453,8 @@ function AddOperator(a){
                     if (currentInput == '') {
                         
                         if (currentInputDoubler.toString().length < 9){
+
+                        
 
                             firstNum = currentInput * currentInput;
                             countNumbers = 0;
@@ -520,7 +561,23 @@ function DoMath(num1, num2, operator){
                     countNumbers = 0;
                     currentInput = '';
                     lowerOperator.textContent = firstNum;
-                    
+                   
+                    if (upperEquation.querySelector("span") !== null){
+
+                        upperEquation.removeChild(upperEquation.firstChild);
+                        upperEquation.removeChild(upperEquation.lastChild);
+                        upperEquation.appendChild(operatorSpan);
+                        operatorSpan.before(num1 + " ");
+                        operatorSpan.after(secondNum);
+                    }
+
+                    else {
+                        
+                        upperEquation.textContent += num1 + " ";
+                        upperEquation.appendChild(operatorSpan);
+                        operatorSpan.after(secondNum);
+
+                    }
                     
                     
 
