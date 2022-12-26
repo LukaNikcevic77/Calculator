@@ -16,6 +16,7 @@ let currentInputDoubler = '';
 let firstNumDoubler = '';
 let isInfinity = false;
 let addedDot = false;
+let flip = 0;
 
 const operatorSpan = document.createElement("span");
 operatorSpan.style.color = "rgb(198,104,105)";
@@ -677,6 +678,10 @@ function AddOperator(a){
 
             break;
 
+            case "switchtheme":
+
+                SwitchTheme();
+
             
             
 
@@ -1041,6 +1046,21 @@ function DoMath(num1, num2, operator){
 
             }
 
+function SwitchTheme(){
+
+    if (flip == 0){
+
+        flip = 1;
+
+    }
+
+    else {
+        
+        flip = 0;
+
+    }
+
+}
 
 
 
