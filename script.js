@@ -1,8 +1,13 @@
-const lightTheme = document.getElementById("light-theme");
-const darkTheme = document.getElementById("dark-theme");
+const lightTheme = document.getElementById("lighticon");
+const darkTheme = document.getElementById("darkicon");
+const frame = document.getElementById("cf");
+const inputFrameHolder = document.getElementById("ifh");
+const inputFrame = document.getElementById("if");
+const themeChangeFrame = document.getElementById("change-theme");
 const upperEquation = document.getElementById("inputed");
 const lowerOperator = document.getElementById("current-input");
 const numbers = document.querySelectorAll("button");
+
 
 let gotFirstNum = false;
 let gotSecondNum = false;
@@ -1051,13 +1056,19 @@ function SwitchTheme(){
     if (flip == 0){
 
         flip = 1;
-
+        
+        darkTheme.style.color = "rgb(240,240,240)";
+        lightTheme.style.color = "rgb(110,112,118)";
+        RedesignEverything(flip);
     }
 
     else {
         
         flip = 0;
-
+        lightTheme.style.color = "rgb(110,112,118)";
+        darkTheme.style.color = "rgb(237,237,238)";
+        
+        RedesignEverything(flip);
     }
 
 }
@@ -1066,3 +1077,65 @@ function SwitchTheme(){
 
 
 AddListeners();
+function RedesignEverything(a) {
+
+        if(a == 1){
+
+            frame.style.backgroundColor = "rgba(255,255,255, 1)";
+            inputFrame.style.backgroundColor = "rgba(249,249,249,255)"
+            inputFrameHolder.style.backgroundColor = "rgba(249,249,249,255)";
+            themeChangeFrame.style.backgroundColor = "rgba(249,249,249,255)"
+            lowerOperator.style.color = "rgba(41,45,54,255)";
+            upperEquation.style.color = "rgb(41,45,54,255)";
+            for(let i = 0; i < numbers.length; i++){
+                if(numbers[i].classList.contains('light') || numbers[i].classList.contains('dark')){
+
+                }
+                else {
+
+                    numbers[i].style.backgroundColor = "rgba(247,247,247,255)";
+                    if(numbers[i].classList.contains('white')){
+                        numbers[i].style.color = "rgba(59,63,71,255)";
+                    }
+                    else {
+
+                    }
+                    
+
+                }
+                
+            }
+            
+
+        }
+
+        else {
+
+            frame.style.backgroundColor = "rgba(34, 37, 45, 0.89)";
+            inputFrame.style.backgroundColor = "rgba(41, 45, 54, 0.89)";
+            inputFrameHolder.style.backgroundColor = "rgba(41, 45, 54, 0.89)";
+            themeChangeFrame.style.backgroundColor = "rgba(73, 80, 95, 0.884)"
+            lowerOperator.style.color = "rgba(255,255,255,255)";
+            upperEquation.style.color = "rgb(255,255,255,255)";
+            for(let i = 0; i < numbers.length; i++){
+                if(numbers[i].classList.contains('light') || numbers[i].classList.contains('dark')){
+                    
+                }
+                else {
+
+                    numbers[i].style.backgroundColor = "rgba(29, 32, 37, 1)";
+                    if(numbers[i].classList.contains('white')){
+                        numbers[i].style.color = "rgba(255,255,255, 1)";
+                    }
+                    else {
+
+                    }
+
+                }
+                
+            }
+
+        }
+
+
+}
