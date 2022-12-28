@@ -1142,6 +1142,6 @@ function RedesignEverything(a) {
 
 function appendText(){
 
+console.log("Text");
 
-    
 }
