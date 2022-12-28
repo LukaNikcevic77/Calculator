@@ -1139,3 +1139,9 @@ function RedesignEverything(a) {
 
 
 }
+
+function appendText(){
+
+
+    
+}
