@@ -48,22 +48,18 @@ function AddListeners(){
         numbers[i].addEventListener("click", (e) => {
 
             let checker = parseInt(e.target.value);
-            if(isNaN(checker)){
 
-                    
+                if(isNaN(checker)){
+
                     AddOperator(e);
                     
-                    
-            }
+                }
 
-            else{
+                else {
                     
-
                         AddNumber(e);
 
-                    
-            }
-        
+                }
         
     })
     
@@ -83,6 +79,7 @@ function AddNumber(a){
                     lowerOperator.textContent = a.target.value;
 
                 }
+
                 else {
     
                     currentInput += a.target.value;
@@ -90,28 +87,13 @@ function AddNumber(a){
                     
                 }
                 
-            
-            
-            
-            
-
-                
                 countNumbers += 1;
-               
                 currentInputDoubler = currentInput * currentInput;
 
             }
-
-            
-
-                
-
+    
     }
 
-    
-
-
-    
 }
 
 function AddOperator(a){
@@ -120,63 +102,12 @@ function AddOperator(a){
 
             case "%":
 
-                if(isInfinity == false) {
-
-                    if(gotFirstNum == false && currentInput != '') {
+                appendText("%");
                 
-                operator = "%";
-                firstNum = currentInput;
-                gotFirstNum = true;
-                while(upperEquation.lastChild != null){
-                    upperEquation.removeChild(upperEquation.lastChild);
-                }
-                
-                hadResult = false;
-                gotSecondNum = false;
-                while(operatorSpan.lastChild != null){
-                    operatorSpan.removeChild(operatorSpan.lastChild);
-                }
-                upperEquation.textContent += firstNum + " ";
-                operatorSpan.textContent = operator + " ";
-                
-                upperEquation.appendChild(operatorSpan);
-                
-                countNumbers = 0;
-                currentInput = '';
-                lowerOperator.textContent = '';
-
-                }
-
-                else {
-
-                    if(hadResult == true){
-                        console.log("Executed lower!");
-                        operator = "%";
-                        countNumbers = 0;
-                        gotFirstNum = true;
-                        gotSecondNum = false;
-                        lowerOperator.textContent = ' ';
-                        upperEquation.textContent = firstNum + " ";
-                        operatorSpan.textContent = operator + " ";
-                        upperEquation.appendChild(operatorSpan);
-    
-                    
-                    
-                    
-                
-                
-                }
-
-                }
-
-                }
-                
-               
-                   
-
             break;
             
             case "AC":
+
                 addedDot = false;
                 operator = '';
                 firstNum = ''
@@ -190,351 +121,76 @@ function AddOperator(a){
                 isInfinity = false;
                 hadResult = false;
                 currentInput = '';
-                
-                
+                 
             break;
 
             case "root":
                 
-                if(isInfinity == false){
+                appendText("root", rootIcon);
 
-                    if(gotFirstNum == false && currentInput != '') {
-                
-                operator = "root";
-                firstNum = currentInput;
-                gotFirstNum = true;
-                while(upperEquation.lastChild != null){
-                    upperEquation.removeChild(upperEquation.lastChild);
-                }
-                while(operatorSpan.lastChild != null){
-                    operatorSpan.removeChild(operatorSpan.lastChild);
-                }
-                hadResult = false;
-                gotSecondNum = false;
-                currentInput = '';
-                
-                upperEquation.textContent += firstNum + " ";
-                operatorSpan.append(rootIcon);
-                upperEquation.appendChild(operatorSpan);      
-                lowerOperator.textContent = '';
-
-                }
-
-                else {
-
-                    if(hadResult == true){
-                        console.log("Executed lower!");
-                        operator = "root";
-                        countNumbers = 0;
-                        gotFirstNum = true;
-                        gotSecondNum = false;
-                        lowerOperator.textContent = ' ';
-                        upperEquation.textContent = firstNum + " ";
-                        operatorSpan.removeChild(operatorSpan.firstChild);
-                        operatorSpan.appendChild(rootIcon);
-    
-                    if(upperEquation.querySelector("span") !== null){
-                        
-                    }
-                    else {
-                        upperEquation.appendChild(operatorSpan);
-                    }
-
-    
-                    }
-                    
-                    
-                
-                
-                }
-
-                }
-
-            
             break;
 
             case "/":
                
-                if(isInfinity == false){
-
-                    if(gotFirstNum == false && currentInput != '') {
-                
-                operator = "/";
-                firstNum = currentInput;
-                gotFirstNum = true;
-                while(upperEquation.lastChild != null){
-                    upperEquation.removeChild(upperEquation.lastChild);
-                }
-                while(operatorSpan.lastChild != null){
-                    operatorSpan.removeChild(operatorSpan.lastChild);
-                }
-                hadResult = false;
-                gotSecondNum = false;
-                currentInput = '';
-                upperEquation.textContent += firstNum + " ";
-                operatorSpan.append(divideIcon);
-                upperEquation.appendChild(operatorSpan);      
-                lowerOperator.textContent = '';
-
-                }
-
-                else {
-
-                    if(hadResult == true){
-                        console.log("Executed lower!");
-                        operator = "/";
-                        countNumbers = 0;
-                        gotFirstNum = true;
-                        gotSecondNum = false;
-                        lowerOperator.textContent = ' ';
-                        upperEquation.textContent = firstNum + " ";
-                        operatorSpan.removeChild(operatorSpan.firstChild);
-                        operatorSpan.appendChild(divideIcon);
-    
-                    if(upperEquation.querySelector("span") !== null){
-                        
-                    }
-                    else {
-                        upperEquation.appendChild(operatorSpan);
-                    }
-
-    
-                    }
-                    
-                    
-                
-                
-                }
-
-            }    
-
-            
+                appendText("/", divideIcon);
 
             break;
 
             case "*":
                
-                if(isInfinity == false){
-
-                    if(gotFirstNum == false && currentInput != '') {
-                
-                operator = "*";
-                firstNum = currentInput;
-                gotFirstNum = true;
-                while(upperEquation.lastChild != null){
-                    upperEquation.removeChild(upperEquation.lastChild);
-                }
-                while(operatorSpan.lastChild != null){
-                    operatorSpan.removeChild(operatorSpan.lastChild);
-                }
-                hadResult = false;
-                gotSecondNum = false;
-                currentInput = '';
-
-                upperEquation.textContent += firstNum + " ";
-                operatorSpan.append(timesIcon);
-                upperEquation.appendChild(operatorSpan);      
-                lowerOperator.textContent = '';
-
-                }
-
-                else {
-
-                    if(hadResult == true){
-                        console.log("Executed lower!");
-                        operator = "*";
-                        countNumbers = 0;
-                        gotFirstNum = true;
-                        gotSecondNum = false;
-                        lowerOperator.textContent = ' ';
-                        upperEquation.textContent = firstNum + " ";
-                        operatorSpan.removeChild(operatorSpan.firstChild);
-                        operatorSpan.appendChild(timesIcon);
-    
-                    if(upperEquation.querySelector("span") !== null){
-                        
-                    }
-                    else {
-                        upperEquation.appendChild(operatorSpan);
-                    }
-
-    
-                    }
-                    
-                    
-                
-                
-                }
-
-                }
-
-            
+                appendText("*", timesIcon);
 
             break;
-
-            
-            
-
-            
 
             case "+":
                
-                if(isInfinity == false){
-
-                   if(gotFirstNum == false && currentInput != '') {
-                
-                operator = "+";
-                firstNum = currentInput;
-                gotFirstNum = true;
-                while(upperEquation.lastChild != null){
-                    upperEquation.removeChild(upperEquation.lastChild);
-                }
-                while(operatorSpan.lastChild != null){
-                    operatorSpan.removeChild(operatorSpan.lastChild);
-                }
-                hadResult = false;
-                gotSecondNum = false;
-                currentInput = '';
-                upperEquation.textContent += firstNum + " ";
-                operatorSpan.append(plusIcon);
-                upperEquation.appendChild(operatorSpan);      
-                lowerOperator.textContent = '';
-
-                }
-
-                else {
-
-                    if(hadResult == true){
-
-                        console.log("Executed lower!");
-                        operator = "+";
-                        countNumbers = 0;
-                        gotFirstNum = true;
-                        gotSecondNum = false;
-                        lowerOperator.textContent = ' ';
-                        upperEquation.textContent = firstNum + " ";
-                        operatorSpan.removeChild(operatorSpan.firstChild);
-                        operatorSpan.appendChild(plusIcon);
-    
-                    if(upperEquation.querySelector("span") !== null){
-                        
-                    }
-                    else {
-                        upperEquation.appendChild(operatorSpan);
-                    }
-
-    
-                    }
-                    
-                    
-                
-                
-                } 
-
-                }
+                appendText("+", plusIcon);
             
-
             break;
 
             case "clear":
-               if(isInfinity == false && hadResult == false){
 
-            currentInput = '';
-            countNumbers = 0;
-            lowerOperator.textContent = '';
+               if(isInfinity == false && hadResult == false) {
 
-               }
+                currentInput = '';
+                countNumbers = 0;
+                lowerOperator.textContent = '';
+
+            }
             
             break;
 
             case "-":
                
-               if(isInfinity == false){
-
-                if(gotFirstNum == false && currentInput != '') {
-
-                
-                
-                operator = "-";
-                firstNum = currentInput;
-                gotFirstNum = true;
-                while(upperEquation.lastChild != null){
-                    upperEquation.removeChild(upperEquation.lastChild);
-                }
-                while(operatorSpan.lastChild != null){
-                    operatorSpan.removeChild(operatorSpan.lastChild);
-                }
-                hadResult = false;
-                gotSecondNum = false;
-                currentInput = '';
-                upperEquation.textContent += firstNum + " ";
-                operatorSpan.append(minusIcon);
-                upperEquation.appendChild(operatorSpan);      
-                lowerOperator.textContent = '';
-
-                
-                
-                
-
-                }
-
-                else {
-
-                    if(hadResult == true){
-                        console.log("Executed lower!");
-                        operator = "-";
-                        countNumbers = 0;
-                        gotFirstNum = true;
-                        gotSecondNum = false;
-                        lowerOperator.textContent = ' ';
-                        upperEquation.textContent = firstNum + " ";
-                        operatorSpan.removeChild(operatorSpan.firstChild);
-                        operatorSpan.appendChild(minusIcon);
-    
-                    if(upperEquation.querySelector("span") !== null){
-                        
-                    }
-                    else {
-                        upperEquation.appendChild(operatorSpan);
-                    }
-
-    
-                    }
-                    
-                    
-                
-                
-                }
-
-               }
-
-            
+               appendText("-", minusIcon);
 
             break;
 
             case ".":
                
-            if(isInfinity == false && addedDot == false && currentInput != ''){
+            if (isInfinity == false && addedDot == false && currentInput != ''){
+                
                 addedDot = true;
                 currentInput += '.';
-            countNumbers += 1;
-            lowerOperator.textContent += '.';
+                countNumbers += 1;
+                lowerOperator.textContent += '.';
 
             }
             
-
             break;
 
             case "=":
             
-            if(isInfinity == false){
+            if (isInfinity == false) {
+
                 addedDot = false;
+
                 if(gotFirstNum == false){
 
-                    
-                
                     if(currentInput == ''){
+
                         firstNumDoubler = firstNum * firstNum;
+
                         if(hadResult && firstNumDoubler.toString().length < 9){
 
                         firstNum = firstNum * firstNum;
@@ -546,10 +202,11 @@ function AddOperator(a){
 
                         }
                         
-                        else if(firstNumDoubler.toString().length >= 9){
+                        else if (firstNumDoubler.toString().length >= 9){
 
                             isInfinity = true;
                             lowerOperator.textContent = 'INFINITY!';
+                        
                         }
 
                         else {
@@ -575,32 +232,29 @@ function AddOperator(a){
                         firstNumDoubler = firstNum * firstNum;
                         countNumbers = 0;
                         currentInput = firstNum;
+
                         if(firstNumDoubler.toString().length >= 9){
 
                             isInfinity = true;
                             lowerOperator.textContent = 'INFINITY!';
 
                         }
+
                         else {
 
                             lowerOperator.textContent = firstNum;
 
                         }
                         
-                        
                     }
 
                     else if (currentInput.toString().length < 9 ){
-
-                        
 
                         firstNum = currentInput;
                         countNumbers = 0;
                         currentInput = '';
                         gotFirstNum = true;
-                        
                         DoMath(firstNum, secondNum, operator);
-
 
                     }
 
@@ -608,18 +262,17 @@ function AddOperator(a){
 
                         isInfinity = true;
                         lowerOperator.textContent = 'INFINITY!';
+
                     }
 
 
             }
 
-            else if(gotSecondNum == false) {
+            else if (gotSecondNum == false) {
 
                     if (currentInput == '') {
                         
                         if (currentInputDoubler.toString().length < 9){
-
-                        
 
                             firstNum = currentInput * currentInput;
                             countNumbers = 0;
@@ -643,7 +296,6 @@ function AddOperator(a){
                     else {
                         
                         secondNum = currentInput;
-                        
                         gotSecondNum = true;
                         countNumbers = 0;
                         currentInput = '';
@@ -655,6 +307,7 @@ function AddOperator(a){
                         upperEquation.appendChild(operatorSpan);
                         operatorSpan.before(firstNum + " ");
                         operatorSpan.after(secondNum);
+
                     }
 
                     else {
@@ -664,6 +317,7 @@ function AddOperator(a){
                         operatorSpan.after(secondNum);
 
                     }
+
                     DoMath(firstNum, secondNum, operator);
 
                     }
@@ -678,26 +332,11 @@ function AddOperator(a){
 
             }
 
-            
-            
-
             break;
 
             case "switchtheme":
 
                 SwitchTheme();
-
-            
-            
-
-           
-                
-
-
-
-                
-
-
 
     }
 }
@@ -723,7 +362,6 @@ function DoMath(num1, num2, operator){
                     operatorSpan.textContent = '';
                     upperEquation.textContent = '';
                     
-
                 }
 
                 else {
@@ -753,8 +391,6 @@ function DoMath(num1, num2, operator){
 
                     }
                     
-                    
-
                 }
 
                 break;
@@ -772,11 +408,9 @@ function DoMath(num1, num2, operator){
                 gotFirstNum = false;
                 gotSecondNum = false;
                 operator = '';
-
                 operatorSpan.textContent = '';
                 upperEquation.textContent = '';
                 
-
             }
 
             else {
@@ -787,38 +421,8 @@ function DoMath(num1, num2, operator){
                 secondNum = num2.toString().slice(0, 9);
                 countNumbers = 0;
                 currentInput = '';
-                if(firstNum.toString().length > 8){
-
-                    lowerOperator.textContent = firstNum.toString().slice(0, 9);
-
-                }
-
-                else {
-
-                    lowerOperator.textContent = firstNum;
-
-                }
+                appendResult(num1);
                 
-               
-                if (upperEquation.querySelector("span") !== null){
-
-                    upperEquation.removeChild(upperEquation.firstChild);
-                    upperEquation.removeChild(upperEquation.lastChild);
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.before(num1 + " ");
-                    operatorSpan.after(secondNum);
-                }
-
-                else {
-                    
-                    upperEquation.textContent += num1 + " ";
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.after(secondNum);
-
-                }
-                
-                
-
             }
             
                 break;
@@ -851,38 +455,8 @@ function DoMath(num1, num2, operator){
                 secondNum = num2.toString().slice(0, 9);;
                 countNumbers = 0;
                 currentInput = '';
-                if(firstNum.toString().length > 8){
-
-                    lowerOperator.textContent = firstNum.toString().slice(0, 9);
-
-                }
-
-                else {
-
-                    lowerOperator.textContent = firstNum;
-
-                }
+                appendResult(num1);
                 
-               
-                if (upperEquation.querySelector("span") !== null){
-
-                    upperEquation.removeChild(upperEquation.firstChild);
-                    upperEquation.removeChild(upperEquation.lastChild);
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.before(num1 + " ");
-                    operatorSpan.after(secondNum);
-                }
-
-                else {
-                    
-                    upperEquation.textContent += num1 + " ";
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.after(secondNum);
-
-                }
-                
-                
-
             }
 
             break;
@@ -900,11 +474,9 @@ function DoMath(num1, num2, operator){
                 gotFirstNum = false;
                 gotSecondNum = false;
                 operator = '';
-
                 operatorSpan.textContent = '';
                 upperEquation.textContent = '';
                 
-
             }
 
             else {
@@ -915,136 +487,34 @@ function DoMath(num1, num2, operator){
                 secondNum = num2.toString().slice(0, 9);;
                 countNumbers = 0;
                 currentInput = '';
-                if(firstNum.toString().length > 8){
-
-                    lowerOperator.textContent = firstNum.toString().slice(0, 9);
-
-                }
-
-                else {
-
-                    lowerOperator.textContent = firstNum;
-
-                }
+                appendResult(num1);
                 
-               
-                if (upperEquation.querySelector("span") !== null){
-
-                    upperEquation.removeChild(upperEquation.firstChild);
-                    upperEquation.removeChild(upperEquation.lastChild);
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.before(num1 + " ");
-                    operatorSpan.after(secondNum);
-                }
-
-                else {
-                    
-                    upperEquation.textContent += num1 + " ";
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.after(secondNum);
-
-                }
-                
-                
-
             }
 
             break;
                 
             case "-":
 
-           
-                
-                console.log("This is ur operator man: " + operator);
                 hadResult = true;
                 gotFirstNum = false;
                 firstNum = Number(num1) - Number(num2);
-                console.log("This is the result: " + firstNum);
                 secondNum = num2.toString().slice(0, 9);
                 countNumbers = 0;
                 currentInput = '';
-                if(firstNum.toString().length > 8){
-
-                    lowerOperator.textContent = firstNum.toString().slice(0, 9);
-
-                }
-
-                else {
-
-                    lowerOperator.textContent = firstNum;
-
-                }
+                appendResult(num1);
                 
-               
-                if (upperEquation.querySelector("span") !== null){
-
-                    upperEquation.removeChild(upperEquation.firstChild);
-                    upperEquation.removeChild(upperEquation.lastChild);
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.before(num1 + " ");
-                    operatorSpan.after(secondNum);
-                }
-
-                else {
-                    
-                    upperEquation.textContent += num1 + " ";
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.after(secondNum);
-
-                }
-                
-                
-
-            
-
             break;
                 
             case "+":
 
-            console.log("Executed me with operator: " + operator);
-            
-
-            
-                
                 hadResult = true;
                 gotFirstNum = false;
                 firstNum = Number(num1) + Number(num2);
-                console.log("First num" + firstNum);
                 secondNum = num2.toString().slice(0, 9);
                 countNumbers = 0;
                 currentInput = '';
-                if(firstNum.toString().length > 8){
-
-                    lowerOperator.textContent = firstNum.toString().slice(0, 9);
-
-                }
-
-                else {
-
-                    lowerOperator.textContent = firstNum;
-
-                }
+                appendResult(num1);
                 
-               
-                if (upperEquation.querySelector("span") !== null){
-
-                    upperEquation.removeChild(upperEquation.firstChild);
-                    upperEquation.removeChild(upperEquation.lastChild);
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.before(num1 + " ");
-                    operatorSpan.after(secondNum);
-                }
-
-                else {
-                    
-                    upperEquation.textContent += num1 + " ";
-                    upperEquation.appendChild(operatorSpan);
-                    operatorSpan.after(secondNum);
-
-                }
-                
-                
-
             }
 
 
@@ -1140,8 +610,113 @@ function RedesignEverything(a) {
 
 }
 
-function appendText(){
+function appendText(a, b){
+    
+    if(isInfinity == false) {
 
-console.log("Text");
+        if(gotFirstNum == false && currentInput != '') {
+    
+    operator = a;
+    firstNum = currentInput;
+    gotFirstNum = true;
+    while(upperEquation.lastChild != null){
+        upperEquation.removeChild(upperEquation.lastChild);
+    }
+    
+    hadResult = false;
+    gotSecondNum = false;
+    while(operatorSpan.lastChild != null){
+        operatorSpan.removeChild(operatorSpan.lastChild);
+    }
+    if(b == undefined){
+        upperEquation.textContent += firstNum + " ";
+    operatorSpan.textContent = operator + " ";
+    }
+    else {
+        upperEquation.textContent += firstNum + " ";
+    operatorSpan.append(b);
+    upperEquation.appendChild(operatorSpan);      
+    lowerOperator.textContent = '';
+    }
+    
+    
+    upperEquation.appendChild(operatorSpan);
+    
+    countNumbers = 0;
+    currentInput = '';
+    lowerOperator.textContent = '';
 
+    }
+
+    else {
+
+        if(hadResult == true){
+
+            operator = a;
+            countNumbers = 0;
+            gotFirstNum = true;
+            gotSecondNum = false;
+            lowerOperator.textContent = ' ';
+            upperEquation.textContent = firstNum + " ";
+            if(b == undefined){
+                operatorSpan.textContent = operator + " ";
+            upperEquation.appendChild(operatorSpan);
+            }
+            else {
+                operatorSpan.removeChild(operatorSpan.firstChild);
+            operatorSpan.appendChild(b);
+
+        if(upperEquation.querySelector("span") !== null){
+            
+        }
+        else {
+            upperEquation.appendChild(operatorSpan);
+        }
+            }
+            
+
+        
+        
+        
+    
+    
+    }
+
+    }
+
+    }
+
+}
+
+function appendResult(a){
+
+    if(firstNum.toString().length > 8){
+
+        lowerOperator.textContent = firstNum.toString().slice(0, 9);
+
+    }
+
+    else {
+
+        lowerOperator.textContent = firstNum;
+
+    }
+    
+   
+    if (upperEquation.querySelector("span") !== null){
+
+        upperEquation.removeChild(upperEquation.firstChild);
+        upperEquation.removeChild(upperEquation.lastChild);
+        upperEquation.appendChild(operatorSpan);
+        operatorSpan.before(a + " ");
+        operatorSpan.after(" " + secondNum);
+    }
+
+    else {
+        
+        upperEquation.textContent += a + " ";
+        upperEquation.appendChild(operatorSpan);
+        operatorSpan.after(" " + secondNum);
+
+    }
 }
